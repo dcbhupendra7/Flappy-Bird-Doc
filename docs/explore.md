@@ -1,5 +1,6 @@
 # Play and Explore!
 
+[Let's Play Real Game](https://dcbhupendra7.github.io/Flappy-Bird-Game/)
 ![AI Mode Controls](ai-controls.png)
 _This is the AI Mode control panel. You can change the Mutation Rate and Population Size, then click ‘Start AI Mode’ to watch the birds learn!_
 Now you know the secrets, try these:
