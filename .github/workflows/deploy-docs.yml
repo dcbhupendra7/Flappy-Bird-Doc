@@ -9,8 +9,7 @@ on:
       - "mkdocs.yml"
 
 permissions:
-  contents: write
-  # Grants write access to the repository
+  contents: write # Grants write access to the repository
 
 jobs:
   deploy:
@@ -18,19 +17,25 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4 # Updated to v4 (latest version)
+        uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v5 # Updated to v5 (latest version)
+        uses: actions/setup-python@v5
         with:
           python-version: "3.x"
 
       - name: Install MkDocs and dependencies
         run: |
           pip install mkdocs
-          pip install mkdocs-material  # Assuming you're using this theme
+          pip install mkdocs-material
+
+      - name: Configure Git credentials
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/dcbhupendra7/Flappy-Bird-Doc.git
 
       - name: Deploy to GitHub Pages
         run: mkdocs gh-deploy --force
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Pass the token to mkdocs
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
