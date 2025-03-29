@@ -9,7 +9,8 @@ on:
       - "mkdocs.yml"
 
 permissions:
-  contents: write # Grants write access to the repository
+  contents: write
+  # Grants write access to the repository
 
 jobs:
   deploy:
