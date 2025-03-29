@@ -5,26 +5,31 @@ on:
     branches:
       - main
     paths:
-      - 'docs/**'
-      - 'mkdocs.yml'
+      - "docs/**"
+      - "mkdocs.yml"
+
+permissions:
+  contents: write # Grants write access to the repository
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v4 # Updated to v4 (latest version)
 
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.x'
+      - name: Set up Python
+        uses: actions/setup-python@v5 # Updated to v5 (latest version)
+        with:
+          python-version: "3.x"
 
-    - name: Install MkDocs and dependencies
-      run: |
-        pip install mkdocs
-        pip install mkdocs-material  # Add this if you're using the Material theme
+      - name: Install MkDocs and dependencies
+        run: |
+          pip install mkdocs
+          pip install mkdocs-material  # Assuming you're using this theme
 
-    - name: Deploy to GitHub Pages
-      run: mkdocs gh-deploy --force
+      - name: Deploy to GitHub Pages
+        run: mkdocs gh-deploy --force
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Pass the token to mkdocs
